@@ -1,6 +1,6 @@
 resource "azurerm_public_ip" "pipipvm-lnx" {
   name                = "var.pipvm-lxn"
-  location            = var.az_vnet_Location_eastus2
+  location            = var.az_vnet_Location_eastus
   resource_group_name = azurerm_resource_group.ResGroup.name
   allocation_method   = "Static"
   tags                = merge(var.tags, { treinamento = "terraform" }, )
@@ -10,7 +10,7 @@ resource "azurerm_public_ip" "pipipvm-lnx" {
 resource "azurerm_network_interface" "nic-vm-lnx" {
   count               = "1"
   name                = "vm-lnx0${count.index + 1}"
-  location            = var.az_vnet_Location_eastus2
+  location            = var.az_vnet_Location_eastus
   resource_group_name = azurerm_resource_group.ResGroup.name
 
   ip_configuration {
@@ -28,7 +28,7 @@ resource "azurerm_network_interface" "nic-vm-lnx" {
 resource "azurerm_linux_virtual_machine" "Resvmlnx" {
   count                 = "1"
   name                  = "VM-LNX01"
-  location              = var.az_vnet_Location_eastus2
+  location              = var.az_vnet_Location_eastus
   resource_group_name   = azurerm_resource_group.ResGroup.name
   network_interface_ids = [azurerm_network_interface.nic-vm-lnx[count.index].id]
   size                  = var.linux_vm_size

@@ -15,7 +15,7 @@ resource "azurerm_network_interface" "nic-vm-lnx" {
 
   ip_configuration {
     name                          = "nic-ipconfig-${count.index + 1}"
-    subnet_id                     = azurerm_subnet.ResSubnet-eastus2[count.index + 1].id
+    subnet_id                     = azurerm_subnet.ResSubnet-eastus[count.index + 1].id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.pipipvm-lnx.id
   }

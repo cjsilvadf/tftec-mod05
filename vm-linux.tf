@@ -53,3 +53,19 @@ resource "azurerm_linux_virtual_machine" "Resvmlnx" {
   tags = merge(var.tags_vnet, { treinamento = "terraform" }, )
 
 }
+
+resource "azurerm_dev_test_global_vm_shutdown_schedule" "ResShutdown" {
+  count               = "1"
+  virtual_machine_id = azurerm_linux_virtual_machine.Resvmlnx[count.index].id
+  location = var.az_vnet_Location_eastus
+  enabled = true
+
+  daily_recurrence_time = "1830"
+  timezone = "E. South America Standard Time"
+
+    notification_settings {
+    enabled         = true
+    time_in_minutes = "15"
+    email = "cleiton@cleitonjose.eti.br"
+  }
+}

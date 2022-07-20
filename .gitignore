@@ -13,3 +13,6 @@
 #variables
 variables.*
 deploy*
+
+#file .out
+deploy-tftec-lab05.out
